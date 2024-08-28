@@ -1,3 +1,234 @@
-vmess://eyJhZGQiOiJscTEuZGFuZzVnLmNsaWNrIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJkbC5rZ3ZuLmdhcmVuYW5vdy5jb20iLCJpZCI6IjJjZDZkNjMzLTM4ZWUtNGMzMS1iNDM3LWFiZmU1YzJhNTIxYiIsIm5ldCI6IndzIiwicGF0aCI6Ii9kYW5nNWcuY2xpY2siLCJwb3J0IjoiODAiLCJwcyI6IvCfkLHwnZyo8J2elPCdkbLwnZyq8J+Hu/Cfh7NC4bqvYyBUcnVuZyBC4buZ4q2QIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9
-vmess://eyJhZGQiOiJjbDEuZGFuZzVnLmNsaWNrIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJkbC5rZ3ZuLmdhcmVuYW5vdy5jb20iLCJpZCI6IjJjZDZkNjMzLTM4ZWUtNGMzMS1iNDM3LWFiZmU1YzJhNTIxYiIsIm5ldCI6IndzIiwicGF0aCI6Ii9kYW5nNWcuY2xpY2siLCJwb3J0IjoiODAiLCJwcyI6IvCfkLHwnZyo8J2elPCdkbLwnZyqIPCfh7vwn4ezTWnhu4FuIFRydW5n4q2QIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9
-vmess://eyJhZGQiOiJtYXhzcGVlZC5kYW5nNWcuY2xpY2siLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6ImRsLmtndm4uZ2FyZW5hbm93LmNvbSIsImlkIjoiMmNkNmQ2MzMtMzhlZS00YzMxLWI0MzctYWJmZTVjMmE1MjFiIiwibmV0Ijoid3MiLCJwYXRoIjoiL2Rhbmc1Zy5jbGljayIsInBvcnQiOiI4MCIsInBzIjoi8J+QsfCdnKjwnZ6U8J2RsvCdnKrwn4e78J+Hs01p4buBbiBOYW3irZAiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0=
+{
+  "log": {
+    "disabled": true,
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "Risma-dns",
+        "address": "1.0.0.1",
+        "strategy": "ipv4_only",
+        "detour": "Risma"
+      },
+      {
+        "tag": "direct-dns",
+        "address": "local",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          ".arpa.",
+          ".arpa"
+        ],
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "domain_suffix": [
+          "vn01.meoovpn.net",
+          "api2-t3.musical.ly.vn.vina.meoovpn.net",
+          "vn.meoovpn.net",
+          "api2-t3.musical.ly.vn.1.meoovpn.net"
+        ],
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "Risma",
+        "server": "Risma-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "direct",
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "any",
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      }
+    ],
+    "reverse_mapping": true,
+    "strategy": "ipv4_only",
+    "independent_cache": true,
+    "disable_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "endpoint_independent_nat": true,
+      "sniff": true
+    },
+    {
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true,
+      "tag": "mixed-in",
+      "type": "mixed"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "%F0%9F%87%BB%F0%9F%87%B3+SV1+-+Vi%E1%BB%87t+Nam",
+      "type": "vless",
+      "server": "vn01.meoovpn.net",
+      "server_port": 80,
+      "uuid": "7969594e-2960-4c93-bd8c-40b89f60b71b",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/vpnmeooai",
+        "headers": {
+          "Host": "v9.tiktokcdn.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "tag": "🇻🇳 Sv2 Việt Nam - Viettel",
+      "type": "vmess",
+      "server": "api2-t3.musical.ly.vn.vina.meoovpn.net",
+      "server_port": 80,
+      "uuid": "7969594e-2960-4c93-bd8c-40b89f60b71b",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/vpnmeooai",
+        "headers": {
+          "Host": "v9.tiktokcdn.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "tag": "🇻🇳 Sv4 Việt Nam",
+      "type": "vmess",
+      "server": "vn.meoovpn.net",
+      "server_port": 80,
+      "uuid": "7969594e-2960-4c93-bd8c-40b89f60b71b",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "",
+        "headers": {
+          "Host": "v9.tiktokcdn.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "tag": "🇻🇳 Sv5 Việt Nam - Viettel",
+      "type": "vmess",
+      "server": "api2-t3.musical.ly.vn.1.meoovpn.net",
+      "server_port": 80,
+      "uuid": "7969594e-2960-4c93-bd8c-40b89f60b71b",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/vpnmeooai",
+        "headers": {
+          "Host": "v9.tiktokcdn.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "type": "urltest",
+      "tag": "Risma",
+      "outbounds": [
+        "%F0%9F%87%BB%F0%9F%87%B3+SV1+-+Vi%E1%BB%87t+Nam",
+        "🇻🇳 Sv2 Việt Nam - Viettel",
+        "🇻🇳 Sv4 Việt Nam",
+        "🇻🇳 Sv5 Việt Nam - Viettel"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m0s"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "override_android_vpn": true,
+    "final": "Risma",
+    "rules": [
+      {
+        "outbound": "dns-out",
+        "port": [
+          53
+        ]
+      }
+    ]
+  }
+}
