@@ -92,7 +92,7 @@
   ],
   "outbounds": [
     {
-      "tag": "%F0%9F%87%BB%F0%9F%87%B3+SV1+-+Vi%E1%BB%87t+Nam",
+      "tag": "🇻🇳 SV1 Việt Nam",
       "type": "vless",
       "server": "vn01.meoovpn.net",
       "server_port": 80,
@@ -197,7 +197,7 @@
       "type": "urltest",
       "tag": "Risma",
       "outbounds": [
-        "%F0%9F%87%BB%F0%9F%87%B3+SV1+-+Vi%E1%BB%87t+Nam",
+        "🇻🇳 SV1 Việt Nam",
         "🇻🇳 Sv2 Việt Nam - Viettel",
         "🇻🇳 Sv4 Việt Nam",
         "🇻🇳 Sv5 Việt Nam - Viettel"
