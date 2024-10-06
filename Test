@@ -1,16 +1,180 @@
 {
-  "add": "nh1.4pn.vn",
-  "aid": "0",
-  "alpn": "",
-  "fp": "",
-  "host": "neko.tiktok.com",
-  "id": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
-  "net": "ws",
-  "path": "/4pn.me",
-  "port": "80",
-  "ps": "🌍 Free 🌍 Name 2",
-  "sni": "",
-  "tls": "",
-  "type": "",
-  "v": "2"
+  "log": {
+    "disabled": true,
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "Risma-dns",
+        "address": "1.0.0.1",
+        "strategy": "ipv4_only",
+        "detour": "Risma"
+      },
+      {
+        "tag": "direct-dns",
+        "address": "local",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          ".arpa.",
+          ".arpa"
+        ],
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "domain_suffix": [
+          "hn1.4pn.vn",
+          "hn1.4pn.vn"
+        ],
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "network": "udp",
+        "port": 443,
+        "server": "block-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "Risma",
+        "server": "Risma-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "direct",
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      },
+      {
+        "outbound": "any",
+        "server": "direct-dns",
+        "rewrite_ttl": 20
+      }
+    ],
+    "reverse_mapping": true,
+    "strategy": "ipv4_only",
+    "independent_cache": true,
+    "disable_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "endpoint_independent_nat": true,
+      "sniff": true
+    },
+    {
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true,
+      "tag": "mixed-in",
+      "type": "mixed"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "😺【Free】🇻🇳Việt Nam 1",
+      "type": "vmess",
+      "server": "hn1.4pn.vn",
+      "server_port": 80,
+      "uuid": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/4pn.me",
+        "headers": {
+          "Host": "neko.tiktok.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "tag": "😺【Free】🇻🇳Việt Nam 2",
+      "type": "vmess",
+      "server": "hn1.4pn.vn",
+      "server_port": 80,
+      "uuid": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
+      "security": "auto",
+      "alter_id": 0,
+      "global_padding": false,
+      "authenticated_length": true,
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/4pn.me",
+        "headers": {
+          "Host": "neko.tiktok.com"
+        },
+        "max_early_data": 0,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "type": "urltest",
+      "tag": "Risma",
+      "outbounds": [
+        "😺【Free】🇻🇳Việt Nam 1",
+        "😺【Free】🇻🇳Việt Nam 2"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m0s"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "override_android_vpn": true,
+    "final": "Risma",
+    "rules": [
+      {
+        "outbound": "dns-out",
+        "port": [
+          53
+        ]
+      }
+    ]
+  }
 }
