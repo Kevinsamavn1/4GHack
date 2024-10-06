@@ -1,0 +1,57 @@
+{
+  "inbounds": [
+    {
+      "type": "vmess",
+      "listen": "0.0.0.0",
+      "listen_port": 1080,
+      "users": [
+        {
+          "uuid": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
+          "alterId": 0
+        }
+      ]
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vmess",
+      "server": "nh1.4pn.vn",
+      "server_port": 80,
+      "uuid": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
+      "alterId": 0,
+      "security": "none",
+      "tls": {
+        "enabled": false
+      },
+      "stream_settings": {
+        "network": "ws",
+        "ws_settings": {
+          "path": "/4pn.me",
+          "headers": {
+            "Host": "neko.tiktok.com"
+          }
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "server": "nh1.4pn.vn",
+      "server_port": 80,
+      "uuid": "fb881fe3-34a8-43bb-8c1d-fdd65b40b93a",
+      "alterId": 0,
+      "security": "none",
+      "tls": {
+        "enabled": false
+      },
+      "stream_settings": {
+        "network": "ws",
+        "ws_settings": {
+          "path": "/4pn.me",
+          "headers": {
+            "Host": "neko.tiktok.com"
+          }
+        }
+      }
+    }
+  ]
+}
